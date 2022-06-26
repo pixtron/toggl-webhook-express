@@ -1,6 +1,7 @@
 import { Logger, LogFn } from './types.js';
 
 const logFn: LogFn = (msg: string, tag: string, meta: unknown): void => {
+  // eslint-disable-next-line no-console
   console.log(tag, msg, meta);
 }
 

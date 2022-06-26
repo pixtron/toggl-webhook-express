@@ -42,7 +42,7 @@ const getSecret = async (
 
 const webhookHandler = (
   options: WebhookHandlerOptions
-): RequestHandler<{}, unknown, WebhookEvent> => {
+): RequestHandler<{[key: string]: string}, unknown, WebhookEvent> => {
   const {
     secretProvider,
     autoValidate = true,
@@ -62,7 +62,7 @@ const webhookHandler = (
     const secret = await getSecret(req, secretProvider);
 
     if (!validateRequestSignature(req, secret)) {
-      logger.warning('Invalid signature', LOG_TAG, {body: req.body, headers: req.headers});
+      logger.warning('Invalid signature', LOG_TAG, { body: req.body, headers: req.headers });
       res.status(403).send('Forbidden');
     }
 
@@ -73,11 +73,11 @@ const webhookHandler = (
           body
         );
 
-        res.json({validation_code: body.validation_code});
+        res.json({ validation_code: body.validation_code });
       } else {
         logger.info('Ping recieved', LOG_TAG, body);
 
-        res.json({status: 'OK'});
+        res.json({ status: 'OK' });
       }
     } else {
       next();
