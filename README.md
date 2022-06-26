@@ -11,7 +11,7 @@ npm install --save toggl-webhook
 
 ## Usage
 
-```
+```ts
 import express from 'express';
 import { webhookHandler } from 'toggl-webhook-express';
 
@@ -29,6 +29,49 @@ app.post('/hook/', webhook, (req, res) => {
 
   console.log('valid webhook event recieved', {date: new Date(), body});
 	res.json({status: 'OK'});
+});
+```
+
+### Provide a secret based on incoming request
+
+```ts
+const webhook = webhookHandler({
+  secretProvider: async (req: Request): Promise<string | null> => {
+    // return secret based on request params (eg. based on userId)
+  }
+});
+```
+
+### Disable autoValidate
+
+By default all incoming ping requests that have a `validation_code` set in the body are [validated](https://developers.track.toggl.com/docs/webhooks_start/url_endpoint_validation) by default. All other ping requests are just logged. To disable this feature set `autoValidate` to false.
+
+```ts
+const webhook = webhookHandler({
+  autoValidate: false
+});
+```
+
+### Provide a custom logger
+
+```ts
+import {LogFn, Logger} from 'toggl-webhook-express';
+
+const logFn: LogFn = (msg: string, tag: string, meta: unknown): void => {
+  console.log(tag, msg, meta);
+}
+
+export const logger: Logger = {
+  silly: logFn,
+  debug: logFn,
+  notice: logFn,
+  info: logFn,
+  warning: logFn,
+  error: logFn,
+}
+
+const webhook = webhookHandler({
+  logger: logger
 });
 ```
 
