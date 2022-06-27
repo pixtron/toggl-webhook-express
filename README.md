@@ -22,10 +22,10 @@ const webhook = webhookHandler({
 });
 
 app.post('/hook/', webhook, (req, res) => {
-	const { body } = req;
+  const { body } = req;
 
   console.log('valid webhook event recieved', {date: new Date(), body});
-	res.json({status: 'OK'});
+  res.json({status: 'OK'});
 });
 ```
 
