@@ -2,7 +2,7 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 import { Request, RequestHandler } from 'express';
 
 import { SecretProvider, WebhookHandlerOptions, WebhookEvent } from './types.js';
-import { logger as defaultLogger } from './logger.js';
+import { DefaultLogger } from './logger.js';
 
 const allowedAlgorithms = ['sha256']
 const LOG_TAG = 'TOGGL_WEBHOOK';
@@ -46,7 +46,7 @@ const webhookHandler = (
   const {
     secretProvider,
     autoValidate = true,
-    logger = defaultLogger
+    logger = new DefaultLogger()
   } = options;
 
   if (!secretProvider) throw new Error('No secretProvider passed');

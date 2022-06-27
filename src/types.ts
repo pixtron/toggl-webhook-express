@@ -2,13 +2,9 @@ import { Request } from 'express';
 
 export type LogFn = (msg: string, tag: string, meta: unknown) => void
 
-export type Logger = {
-  silly: LogFn
-  debug: LogFn
-  notice: LogFn
+export interface Logger {
   info: LogFn
   warning: LogFn
-  error: LogFn
 }
 
 export type WebhookHandlerOptions = {

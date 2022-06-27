@@ -1,15 +1,12 @@
-import { Logger, LogFn } from './types.js';
+import { Logger } from './types.js';
 
-const logFn: LogFn = (msg: string, tag: string, meta: unknown): void => {
-  // eslint-disable-next-line no-console
-  console.log(tag, msg, meta);
-}
-
-export const logger: Logger = {
-  silly: logFn,
-  debug: logFn,
-  notice: logFn,
-  info: logFn,
-  warning: logFn,
-  error: logFn,
+export class DefaultLogger implements Logger {
+  info(msg: string, tag: string, meta: unknown) {
+    // eslint-disable-next-line no-console
+    console.info(tag, msg, meta);
+  }
+  warning(msg: string, tag: string, meta: unknown) {
+    // eslint-disable-next-line no-console
+    console.warn(tag, msg, meta);
+  }
 }

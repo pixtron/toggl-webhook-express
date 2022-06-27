@@ -55,23 +55,19 @@ const webhook = webhookHandler({
 ### Provide a custom logger
 
 ```ts
-import {LogFn, Logger} from 'toggl-webhook-express';
+import { Logger } from 'toggl-webhook-express';
 
-const logFn: LogFn = (msg: string, tag: string, meta: unknown): void => {
-  console.log(tag, msg, meta);
-}
-
-export const logger: Logger = {
-  silly: logFn,
-  debug: logFn,
-  notice: logFn,
-  info: logFn,
-  warning: logFn,
-  error: logFn,
+class MyLogger implements Logger {
+  info(msg: string, tag: string, meta: unknown) {
+    console.info(tag, msg, meta);
+  }
+  warning(msg: string, tag: string, meta: unknown) {
+    console.warn(tag, msg, meta);
+  }
 }
 
 const webhook = webhookHandler({
-  logger: logger
+  logger: new MyLogger()
 });
 ```
 
