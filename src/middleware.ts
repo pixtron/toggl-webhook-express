@@ -57,6 +57,7 @@ const webhookHandler = (
     if (!validateRequestBody(body)) {
       logger.warning('Invalid request body sending 400', LOG_TAG, body);
       res.status(400).send('Bad Request');
+      return;
     }
 
     const secret = await getSecret(req, secretProvider);
@@ -64,6 +65,7 @@ const webhookHandler = (
     if (!validateRequestSignature(req, secret)) {
       logger.warning('Invalid signature', LOG_TAG, { body: req.body, headers: req.headers });
       res.status(403).send('Forbidden');
+      return;
     }
 
     if (autoValidate && body.payload === 'ping') {
