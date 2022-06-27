@@ -6,9 +6,6 @@
 npm install --save toggl-webhook
 ```
 
-*Warning*: This package is native [ESM](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) and does not provide a CommonJS export. If your project uses CommonJS, you'll have to [convert to ESM](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c) or use the dynamic import() function. Please don't open issues for questions regarding CommonJS / ESM.
-
-
 ## Usage
 
 ```ts

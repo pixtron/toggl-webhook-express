@@ -1,19 +1,16 @@
 {
-	"extends": "@sindresorhus/tsconfig",
+  "extends": "@tsconfig/node16/tsconfig.json",
   "compileOnSave": true,
   "compilerOptions": {
-		"outDir": "dist",
-		"target": "es2020",
-		"lib": [
-			"es2020"
-		],
-		"removeComments": true
-	},
+    "declaration": true,
+    "useDefineForClassFields": true,
+    "esModuleInterop": false,
+    "outDir": "./dist",
+    "removeComments": true
+  },
   "include": ["src/**/*"],
   "exclude": [
-    "node_modules",
-    "**/node_modules/*",
-    "coverage",
-    "doc"
+     "node_modules",
+     "**/node_modules/*",
   ]
 }
