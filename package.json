@@ -1,6 +1,6 @@
 {
   "name": "toggl-webhook-express",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Express middleware to validate toggl webhook requests",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
